@@ -1,0 +1,50 @@
+services:
+  postgres_fragment:
+    image: postgres
+    container_name: postgres_fragment
+    restart: always
+    environment:
+      POSTGRES_USER: sgbdd
+      POSTGRES_PASSWORD: sgbdd
+      POSTGRES_DB: sgbdd
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  neo4j_fragment:
+    image: neo4j
+    container_name: neo4j_fragment
+    restart: always
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ./neo4j_data:/data
+
+  mongo1:
+      image: mongo
+      container_name: mongo1
+      command: ["mongod", "--replSet", "myReplicaSet", "--bind_ip", "localhost,mongo1"]
+      ports:
+        - "27017:27017"
+      volumes:
+        - ./mongo1_data:/data/db
+
+  mongo2:
+    image: mongo
+    container_name: mongo2
+    command: ["mongod", "--replSet", "myReplicaSet", "--bind_ip", "localhost,mongo2"]
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./mongo2_data:/data/db
+
+  mongo3:
+    image: mongo
+    container_name: mongo3
+    command: ["mongod", "--replSet", "myReplicaSet", "--bind_ip", "localhost,mongo3"]
+    ports:
+      - "27019:27017"
+    volumes:
+      - ./mongo3_data:/data/db

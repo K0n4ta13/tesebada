@@ -1,0 +1,48 @@
+[[tables]]
+name = "clientes"
+fields = [
+  { name = "IdCliente", type = "int" },
+  { name = "Nombre", type = "string" },
+  { name = "Estado", type = "string" },
+  { name = "Credito", type = "float" },
+  { name = "Deuda", type = "float" },
+]
+
+[[tables.fragments]]
+name = "customers"
+connection = "postgresql://sgbdd:sgbdd@localhost:5432/sgbdd"
+manager = "postgres"
+zone = "Norte"
+fields = [
+  { name = "CustomerId", type = "int", reference = "IdCliente" },
+  { name = "FullName", type = "string", reference = "Nombre" },
+  { name = "State", type = "string", reference = "Estado" },
+  { name = "CreditAmount", type = "float", reference = "Credito" },
+  { name = "DebtAmount", type = "float", reference = "Deuda" },
+]
+
+[[tables.fragments]]
+name = "clients"
+connection = "mongodb://mongo2:27018,mongo1:27017,mongo3:27019/sgbdd?replicaSet=myReplicaSet"
+manager = "mongo"
+zone = "Centro"
+fields = [
+  { name = "ClientId", type = "int", reference = "IdCliente" },
+  { name = "ClientName", type = "string", reference = "Nombre" },
+  { name = "Region", type = "string", reference = "Estado" },
+  { name = "AvailableCredit", type = "float", reference = "Credito" },
+  { name = "OutstandingDebt", type = "float", reference = "Deuda" },
+]
+
+[[tables.fragments]]
+name = "members"
+connection = "bolt://neo4j:sgbdd123@localhost:7687"
+manager = "neo4j"
+zone = "Sur"
+fields = [
+  { name = "MemberId", type = "int", reference = "IdCliente" },
+  { name = "Name", type = "string", reference = "Nombre" },
+  { name = "Province", type = "string", reference = "Estado" },
+  { name = "CreditBalance", type = "float", reference = "Credito" },
+  { name = "DebtBalance", type = "float", reference = "Deuda" },
+]
