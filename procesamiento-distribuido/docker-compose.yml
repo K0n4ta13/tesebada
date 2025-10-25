@@ -1,0 +1,12 @@
+services:
+  db1:
+    build: .
+    container_name: db1
+    ports:
+      - "5432:5432"
+
+  db2:
+    build: .
+    container_name: db2
+    environment:
+        STORE: 1
