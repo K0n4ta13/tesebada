@@ -5,7 +5,8 @@ use std::{
     io::{BufRead, Write},
 };
 
-use chrono::NaiveDate;
+use chrono::{Datelike, NaiveDate};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug)]
 struct Record {
@@ -18,6 +19,11 @@ struct Record {
     card_id: u32,
     target: u32,
     gender: String,
+}
+
+#[derive(Serialize, Deserialize)]
+struct Currency {
+    conversion_rates: HashMap<String, f64>,
 }
 
 impl Record {
@@ -55,6 +61,42 @@ impl std::fmt::Display for Record {
     }
 }
 
+#[derive(Debug)]
+struct Transaction {
+    card_id: u32,
+    date: NaiveDate,
+    country: String,
+    import: f64,
+    usd: f64,
+}
+
+impl Transaction {
+    fn from_str(s: &str) -> Self {
+        let parts = s.split(',').collect::<Vec<_>>();
+        Self {
+            card_id: parts[0].parse().unwrap(),
+            date: normalize_date(parts[1]),
+            country: parts[2].to_string(),
+            import: parts[3].parse().unwrap(),
+            usd: 0f64,
+        }
+    }
+}
+
+impl std::fmt::Display for Transaction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{},{},{},{},{}",
+            self.card_id,
+            self.date.format("%-d/%-m/%-Y"),
+            self.country,
+            self.import,
+            self.usd
+        )
+    }
+}
+
 fn main() {
     let file = std::fs::File::open("solicitudes.csv").unwrap();
     let file = std::io::BufReader::new(file);
@@ -65,7 +107,7 @@ fn main() {
     let headers = file.next().map(|r| r.unwrap()).unwrap();
 
     let data = file
-        .map(|row| row.unwrap())
+        .map(Result::unwrap)
         .map(|row| Record::from_str(&row))
         .map(|row| {
             let hash: u128 = row
@@ -113,10 +155,48 @@ fn main() {
         })
         .collect::<LinkedList<_>>();
 
-    let mut output_file = File::create("clean.csv").unwrap();
+    let mut output_file = File::create("solicitudes-clean.csv").unwrap();
     writeln!(output_file, "{headers}").unwrap();
     data.iter()
         .for_each(|r| writeln!(output_file, "{r}").unwrap());
+
+    let file = std::fs::File::open("transacciones.csv").unwrap();
+    let file = std::io::BufReader::new(file);
+    let mut file = file.lines();
+
+    let mut headers = file.next().map(|r| r.unwrap()).unwrap();
+    headers.push_str("Importe USD");
+    let mut output_file = File::create("transacciones-clean.csv").unwrap();
+    writeln!(output_file, "{headers}").unwrap();
+
+    file
+        .map(Result::unwrap)
+        .map(|row| Transaction::from_str(&row))
+        .map(|mut tran| {
+            let currency_code = match tran.country.as_str() {
+                "Mexico" => "MXN",
+                "Japon" => "JYP",
+                "Brasil" => "BRL",
+                "Francia" => "EUR",
+                "USA" => "USD",
+                _ => unreachable!(),
+            };
+            let dolars = match currency_code {
+                "USD" => tran.import,
+                code => {
+                    let year = tran.date.year();
+                    let month = tran.date.month();
+                    let day = tran.date.day();
+
+                    let url = format!("https://v6.exchangerate-api.com/v6/b52d3246c5b48151bae8546a/history/{code}/{year}/{month}/{day}");
+                    let currency: Currency = reqwest::blocking::get(url).unwrap().json().unwrap();
+                    currency.conversion_rates.get(code).unwrap() * tran.import
+                }
+            };
+            tran.usd = dolars;
+            tran
+    })
+    .for_each(|tran| writeln!(output_file, "{tran}").unwrap());
 }
 
 fn normalize_date(date: &str) -> NaiveDate {
