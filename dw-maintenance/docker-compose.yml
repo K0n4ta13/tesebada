@@ -1,0 +1,24 @@
+services:
+  db1:
+    image: postgres
+    container_name: postgres_db1
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: dw
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - ./db1_data:/var/lib/postgresql/data
+
+  db2:
+    image: postgres
+    container_name: postgres_db2
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: dw
+    # volumes:
+    #   - ./db2_data:/var/lib/postgresql/data
