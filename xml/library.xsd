@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="library">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="authors"/>
+        <xs:element ref="books"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="authors">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="author"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="author">
+    <xs:complexType mixed="true">
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="nationality" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="books">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="book"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="book">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element ref="genre"/>
+        <xs:element ref="publisher"/>
+        <xs:element minOccurs="0" ref="print_edition"/>
+        <xs:choice minOccurs="0">
+          <xs:element ref="digital_edition"/>
+          <xs:element ref="synopsis"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="author" use="required" type="xs:NCName"/>
+      <xs:attribute name="isbn" use="required" type="xs:NMTOKEN"/>
+      <xs:attribute name="language" use="required" type="xs:NCName"/>
+      <xs:attribute name="release_year" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title">
+    <xs:complexType mixed="true">
+      <xs:attribute name="original_title"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="genre" type="xs:string"/>
+  <xs:element name="publisher">
+    <xs:complexType>
+      <xs:attribute name="country" use="required"/>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="print_edition">
+    <xs:complexType>
+      <xs:attribute name="cover" use="required" type="xs:NCName"/>
+      <xs:attribute name="pages" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="digital_edition">
+    <xs:complexType>
+      <xs:attribute name="format" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="synopsis" type="xs:string"/>
+</xs:schema>

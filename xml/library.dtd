@@ -1,0 +1,34 @@
+<!ELEMENT library (authors, books)>
+
+<!ELEMENT authors (author+)>
+<!ELEMENT author (#PCDATA)>
+
+<!ATTLIST author id ID #REQUIRED>
+<!ATTLIST author nationality CDATA #IMPLIED>
+
+<!ELEMENT books (book+)>
+
+<!ELEMENT book (title, genre, publisher, (print_edition | digital_edition), synopsis?)>
+
+<!ATTLIST book isbn NMTOKEN #REQUIRED>
+<!ATTLIST book language NMTOKEN #REQUIRED>
+<!ATTLIST book release_year NMTOKEN #REQUIRED>
+<!ATTLIST book author IDREF #REQUIRED>
+
+<!ELEMENT title (#PCDATA)>
+<!ATTLIST title original_title CDATA #IMPLIED>
+
+<!ELEMENT genre (#PCDATA)>
+
+<!ELEMENT publisher EMPTY>
+<!ATTLIST publisher name CDATA #REQUIRED>
+<!ATTLIST publisher country CDATA #IMPLIED>
+
+<!ELEMENT print_edition EMPTY>
+<!ATTLIST print_edition cover (hardcover | paperback) #REQUIRED>
+<!ATTLIST print_edition pages NMTOKEN #REQUIRED>
+
+<!ELEMENT digital_edition EMPTY>
+<!ATTLIST digital_edition format (pdf | epub) #REQUIRED>
+
+<!ELEMENT synopsis (#PCDATA)>

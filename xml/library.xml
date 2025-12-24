@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE library SYSTEM "library.dtd">
+<library>
+    <authors>
+        <author id="JR" nationality="Mexicana">Juan Rulfo</author>
+        <author id="JJA" nationality="Mexicana">Juan José Arreola</author>
+        <author id="MVL" nationality="Peruana">Mario Vargas Llosa</author>
+        <author id="OP" nationality="Mexicana">Octavio Paz</author>
+        <author id="YK" nationality="Japonesa">Yasunari Kawabata</author>
+        <author id="KO" nationality="Japonesa">Kenzaburō Ōe</author>
+        <author id="YM" nationality="Japonesa">Yukio Mishima</author>
+        <author id="OD" nationality="Japonesa">Osamu Dazai</author>
+        <author id="HM" nationality="Japonesa">Haruki Murakami</author>
+        <author id="DA" nationality="Italiana">Dante Alighieri</author>
+        <author id="FD" nationality="Rusa">Fiódor Dostoyevski</author>
+        <author id="FK" nationality="Checa">Franz Kafka</author>
+        <author id="GO" nationality="Británica">George Orwell</author>
+    </authors>
+
+    <books>
+        <book isbn="978-84-376-0418-3" language="es" release_year="1955" author="JR">
+            <title>Pedro Páramo</title>
+            <genre>Novela</genre>
+            <publisher name="Fondo de Cultura Económica" country="México"/>
+            <print_edition cover="paperback" pages="132"/>
+            <synopsis>Una de las obras maestras de la literatura hispanoamericana.</synopsis>
+        </book>
+
+        <book isbn="978-607-16-1662-7" language="es" release_year="1952" author="JJA">
+            <title>Confabulario</title>
+            <genre>Cuento</genre>
+            <publisher name="Joaquín Mortiz" country="México"/>
+            <digital_edition format="epub"/>
+        </book>
+
+        <book isbn="978-84-204-7183-9" language="es" release_year="1963" author="MVL">
+            <title>La ciudad y los perros</title>
+            <genre>Novela</genre>
+            <publisher name="Seix Barral" country="España"/>
+            <print_edition cover="hardcover" pages="448"/>
+        </book>
+
+        <book isbn="978-84-376-0239-4" language="es" release_year="1950" author="OP">
+            <title>El laberinto de la soledad</title>
+            <genre>Ensayo</genre>
+            <publisher name="Cuadernos Americanos" country="México"/>
+            <digital_edition format="pdf"/>
+        </book>
+
+        <book isbn="978-84-95501-14-1" language="jp" release_year="1964" author="YK">
+            <title original_title="Utsukushisa to Kanashimi to">Lo bello y lo triste</title>
+            <genre>Novela</genre>
+            <publisher name="Emecé" country="Argentina"/>
+            <print_edition cover="paperback" pages="224"/>
+        </book>
+
+        <book isbn="978-84-339-1457-6" language="jp" release_year="1964" author="KO">
+            <title original_title="Kojinteki na taiken">Una cuestión personal</title>
+            <genre>Novela</genre>
+            <publisher name="Anagrama" country="España"/>
+            <print_edition cover="paperback" pages="192"/>
+        </book>
+
+        <book isbn="978-84-206-3333-6" language="jp" release_year="1949" author="YM">
+            <title original_title="Kamen no Kokuhaku">Confesiones de una máscara</title>
+            <genre>Novela</genre>
+            <publisher name="Alianza Editorial" country="España"/>
+            <print_edition cover="paperback" pages="256"/>
+        </book>
+
+        <book isbn="978-84-937407-1-9" language="jp" release_year="1948" author="OD">
+            <title original_title="Ningen Shikkaku">Indigno de ser humano</title>
+            <genre>Novela</genre>
+            <publisher name="Sajalín Editores" country="España"/>
+            <digital_edition format="epub"/>
+        </book>
+
+        <book isbn="978-84-376-0336-0" language="it" release_year="1472" author="DA">
+            <title original_title="Divina Commedia">La divina comedia</title>
+            <genre>Poesía Épica</genre>
+            <publisher name="Cátedra" country="España"/>
+            <print_edition cover="hardcover" pages="860"/>
+        </book>
+
+        <book isbn="978-84-206-5381-5" language="ru" release_year="1880" author="FD">
+            <title original_title="Brat'ya Karamazovy">Los hermanos Karamázov</title>
+            <genre>Novela filosófica</genre>
+            <publisher name="Alianza Editorial" country="España"/>
+            <print_edition cover="paperback" pages="1120"/>
+        </book>
+
+        <book isbn="978-84-206-3554-5" language="de" release_year="1925" author="FK">
+            <title original_title="Der Process">El proceso</title>
+            <genre>Novela</genre>
+            <publisher name="Die Schmiede" country="Alemania"/>
+            <digital_edition format="pdf"/>
+        </book>
+
+        <book isbn="978-0-141-03614-4" language="en" release_year="1949" author="GO">
+            <title>1984</title>
+            <genre>Ciencia Ficción</genre>
+            <publisher name="Secker and Warburg" country="Reino Unido"/>
+            <print_edition cover="paperback" pages="328"/>
+        </book>
+
+        <book isbn="978-84-8383-561-2" language="jp" release_year="2014" author="HM">
+            <title original_title="Onna no inai otokotachi">Hombres sin mujeres</title>
+            <genre>Cuento</genre>
+            <publisher name="Tusquets" country="España"/>
+            <print_edition cover="paperback" pages="288"/>
+        </book>
+    </books>
+</library>
